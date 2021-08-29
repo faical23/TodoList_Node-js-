@@ -17,7 +17,7 @@
             </div>
         </div>
         <p  class="SeeMore" @click="SeeMore+=5">See more</p>
-          <NewTask v-if="NewTaskClicked" :WhatDoUWantToDo={WhatDoUWantToDo} />
+          <NewTask v-if="NewTaskClicked" :WhatDoUWantToDo={WhatDoUWantToDo}  @NewTask="AddNewTask" />
       </div>
   </div>
 </template>
@@ -69,6 +69,11 @@ export default {
         }).catch((err)=>{
           console.log(err)
         })
+      },
+      AddNewTask(e){
+        this.NewTaskClicked = false
+        let NewTskId = this.AllTask[this.AllTask.length-1].id +1
+        this.AllTask.push({id:NewTskId ,Task:e,date:null})
       }
   },
   created(){

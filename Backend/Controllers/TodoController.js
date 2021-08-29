@@ -30,13 +30,16 @@ const DeleteTodo = (req, res, next) => {
 };
 
 const AddTodo = (req, res, next) => {
-        let NewTask = mysql.escape(req.body.task);
+        let NewTask = mysql.escape(req.body.Task);
         let NewDate = new Date();
-        var sql = `INSERT INTO tasks (Task, date) VALUES (${NewTask},'${NewDate}')`;
-        con.query(sql, function (err, result) {
-          if (err) throw err;
-          res.json({message: "1 record inserted"}); 
-        });
+        if(NewTask != '')
+        {
+          var sql = `INSERT INTO tasks (Task, date) VALUES (${NewTask},'${NewDate}')`;
+          con.query(sql, function (err, result) {
+            if (err) throw err;
+            res.json("succesfly"); 
+          });
+        }
         res.end();
 };
 const UpdateTodo = (req, res, next) => {
